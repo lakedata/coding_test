@@ -12,14 +12,14 @@ public class 국회의원선거 {
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
         //다른 후보 투표수 저장
-        while (n-->1) pq.add(Integer.parseInt(br.readLine()));
+        while (n-- > 1) pq.add(Integer.parseInt(br.readLine()));
         int cnt = 0;
 
         //다른 후보의 사람들 매수 진행
         while (!pq.isEmpty() && pq.peek() >= a) {
             cnt++;
             a++;//매수 횟수 +1
-            pq.add(pq.poll()-1);//가장 큰 후보 투표수 -1
+            pq.add(pq.poll() - 1);//가장 큰 후보 투표수 -1
         }
         System.out.println(cnt);
     }
