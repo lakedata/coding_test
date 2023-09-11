@@ -1,5 +1,8 @@
 # coding_test
-백준 문제풀이 🥇골드(Gold)목표
+백준 문제풀이 <br/>
+🥇골드(Gold)목표 <br/>
+[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=wldud2550)](https://solved.ac/wldud2550/)
+
 
 주제:<br/>
 문자열탐색과 해싱, 시뮬레이션과 구현, 자료구조활용(스택, 큐, 우선순위큐, 데크), 그리디, sorting, 이분탐
