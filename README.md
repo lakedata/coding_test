@@ -1,7 +1,7 @@
 # coding_test
 백준 문제풀이 <br/>
 🥇골드(Gold)목표 <br/>
-[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=wldud2550)](https://solved.ac/wldud2550/)
+[![Solved.ac Profile](http://mazassumnida.wtf/api/generate_badge?boj=wldud2550)](https://solved.ac/wldud2550)
 
 
 주제:<br/>
