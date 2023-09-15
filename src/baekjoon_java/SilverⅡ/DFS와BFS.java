@@ -33,16 +33,18 @@ public class DFS와BFS {
         }
         visited = new boolean[N + 1];
         dfs(V);
-        //visited = new boolean[N + 1];
-        //bfs(V);
+        System.out.println();
+
+        visited = new boolean[N + 1];
+        bfs(V);
+        System.out.println();
     }
 
     public static void dfs(int V) {
         visited[V] = true;
+        System.out.print(V + " ");
 
-        if(V == arr.length) return;
-
-        for (int node = 1; node <= arr.length; node++) {
+        for (int node = 1; node < arr.length; node++) {
             if (arr[V][node] == 1 && !visited[node]) {
                 dfs(node);
             }
@@ -51,10 +53,10 @@ public class DFS와BFS {
 
     public static void bfs(int V) {
         Queue<Integer> queue = new LinkedList<Integer>();
-
         queue.add(V); // 큐에 해당 정점 번호를 넣어줌
         visited[V] = true; // 방문했다는 표식을 남겨줌
 
+        System.out.print(V + " ");
         while (!queue.isEmpty()) { // 큐가 비어있지 않으면
             int temp = queue.poll(); // 큐에 담겨있는 번호 중 가장 앞에 담겨져있는 번호
             for (int node = 1; node < arr.length; node++) {
