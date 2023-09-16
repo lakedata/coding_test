@@ -10,9 +10,8 @@ public class 단지번호붙이기 {
     static int N, cnt = 0;//총 단지수, 단지내 집의 수
     static int[][] map;
     static boolean[][] visited;
-    static int[] dx = {0, 0, -1, 1};;//상하좌우(좌우)
+    static int[] dx = {0, 0, -1, 1};//상하좌우(좌우)
     static int[] dy = {-1, 1, 0, 0};//상하좌우(상하)
-
 
     public static void main(String[] arg) throws IOException {
 
