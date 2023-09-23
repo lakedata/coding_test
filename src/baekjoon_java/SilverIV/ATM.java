@@ -37,6 +37,6 @@ public class ATM {
             sum += p[i];
         }
 
-        System.out.println(sum);//각 사람이 돈을 인출하는데 걸리는 시간
+        System.out.println(sum);// 각 사람이 돈을 인출하는데 걸리는 시간
     }
 }
