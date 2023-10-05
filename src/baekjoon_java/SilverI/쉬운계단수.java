@@ -35,6 +35,7 @@ public class 쉬운계단수 {// dp 18944번
         for (int i = 0; i < 10; i++) {
             sum += dp[N][i];
         }
+
         //System.out.println(sum); 아님 주의
         System.out.println(sum % mod);
     }
