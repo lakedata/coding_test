@@ -1,7 +1,9 @@
 import java.io.*;
 
+
 /**
  * 백준 11654번 아스키 코드 (https://www.acmicpc.net/problem/11654)
+ * 14240KB 128ms
  */
 public class 아스키코드 {
     public static void main(String[] args) throws IOException {
