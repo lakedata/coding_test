@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+   백준 24419번 행렬 경로 문제 2 (https://www.acmicpc.net/problem/24419)
+**/
 public class 행렬경로문제2 {
     static final int MOD = 1_000_000_007;
 
