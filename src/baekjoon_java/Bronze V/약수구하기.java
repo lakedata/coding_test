@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
- * 백준 2501번 약수 구하기 (https://www.acmicpc.net/problem/24418)
+ * 백준 2501번 약수 구하기 (https://www.acmicpc.net/problem/2501)
  */
 public class 약수구하기 {
     public static void main(String arg[]) throws IOException {
