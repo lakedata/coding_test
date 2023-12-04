@@ -12,26 +12,31 @@ public class boj_12865_평범한배낭 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = Integer.parseInt(st.nextToken());
-        int K = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
 
-        int W[] = new int[N + 1]; //무게
-        int V[] = new int[N + 1]; //가치
-
-        for (int i = 0; i < N; i++) {
+        int[] w = new int[n];
+        int[] v = new int[n];
+        for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
-            W[i] = Integer.parseInt(st.nextToken());
-            V[i] = Integer.parseInt(st.nextToken());
+            w[i] = Integer.parseInt(st.nextToken());
+            v[i] = Integer.parseInt(st.nextToken());
         }
-        dp = new int[N + 1][K + 1];
-        for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= K; j++) {
-                dp[i][j] = dp[i - 1][j];// 이전 행 결과 복사
-                if (j - W[i] >= 0) { // 무게가 남으면
-                    dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - W[i]] + V[i]);// 더 큰 값으로 갱신
+        int[][] dp = new int[n][k + 1];
+        for (int i = 0; i < n; i++) {
+            int weight = w[i];
+            for (int j = 0; j <= k; j++) {
+                if (i == 0) {
+                    if (weight <= j) dp[i][j] = v[i];
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                    if (weight <= j) {
+                        dp[i][j] = Math.max(dp[i - 1][j - w[i]] + v[i], dp[i - 1][j]);
+                    }
                 }
             }
         }
-        System.out.println(dp[N][K]);
+        System.out.println(dp[n - 1][k]);
+
     }
 }
