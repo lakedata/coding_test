@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class boj_8979_올림픽 {
 
     public static void main(String args[]) throws IOException {
 
