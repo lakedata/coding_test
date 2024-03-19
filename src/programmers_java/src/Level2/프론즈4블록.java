@@ -30,8 +30,8 @@ public class 프론즈4블록 { //2018 KAKAO BLIND RECRUITMENT
         int cnt = 0;
         boolean[][] isChecked = new boolean[m][n];
 
-        for (int i = 0; i < m - 1; i++) {
-            for (int j = 0; j < n - 1; j++) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 if (map[i][j] == '.') continue;
                 checkFour(map, isChecked, i, j);
             }
@@ -51,25 +51,27 @@ public class 프론즈4블록 { //2018 KAKAO BLIND RECRUITMENT
     private static void checkFour(char[][] map, boolean[][] isChecked, int i, int j) {
         char block = map[i][j];
 
-        for (int r = i; r < i + 2; r++) {
-            for (int c = j; c < j + 2; c++) {
-                if (map[r][c] != block) return;
+        if (i + 1 < map.length && j + 1 < map[0].length) {
+            for (int r = i; r < i + 2; r++) { //블록이 같은지 체크
+                for (int c = j; c < j + 2; c++) {
+                    if (map[r][c] != block) return;
+                }
             }
-        }
-        for (int r = i; r < i + 2; r++) {
-            for (int c = j; c < j + 2; c++) {
-                isChecked[r][c] = true;
+            for (int r = i; r < i + 2; r++) { //제거된 블록 표시
+                for (int c = j; c < j + 2; c++) {
+                    isChecked[r][c] = true;
+                }
             }
         }
     }
 
     private static void dropBlock(int m, int n, char[][] map) {
-        for (int c = 0; c < n; c++) {
-            for (int r = m - 1; r >= 0; r--) {
+        for (int c = 0; c < n; c++) { //열
+            for (int r = m - 1; r >= 0; r--) { //행: 아래서 위로
                 if (map[r][c] == '.') {
                     for (int nr = r - 1; nr >= 0; nr--) {
                         if (map[nr][c] != '.') {
-                            map[r][c] = map[nr][c];
+                            map[r][c] = map[nr][c]; //위 쪽에서 블록 발견된거 옮김
                             map[nr][c] = '.';
                             break;
                         }
