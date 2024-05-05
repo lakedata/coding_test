@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_1027_고층건물 { //유형: 브루트포스, 메모리제한: 128MB, 시간 제한: 2초
+public class boj_1027_고층건물 { // 유형: 브루트포스, 메모리제한: 128MB, 시간 제한: 2초
     static int N;
     static int[] arr;
 
