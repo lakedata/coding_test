@@ -22,7 +22,6 @@ public class boj_2631_줄세우기 {
             }
             max = Math.max(max, dp[i]);
         }
-
         System.out.println(n - max);
     }
 }
