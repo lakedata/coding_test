@@ -5,43 +5,38 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-/*https://www.acmicpc.net/problem/15649
-백트래킹 , 23396KB ,268ms*/
 public class N과M1 {
     public static int[] arr;
-    public static boolean[] visit;
-    public static StringBuilder sb = new StringBuilder();
-    public static int N;
+    public static boolean[] isUsed;
+    public static int n, m;
 
-    public static int M;
-
-    public static void main (String args[]) throws IOException {
+    public static void main(String args[]) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-        arr = new int[M];
-        visit = new boolean[N];
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        arr = new int[m + 1];
+        isUsed = new boolean[n + 1];
 
-        back(0);
-        System.out.println(sb);
+        func(0);
     }
 
-    public static void back(int depth) {
-        if (depth == M) {	// 재귀 깊이가 M과 같아지면 탐색과정에서 담았던 배열을 출력
-            for (int val : arr) {
-                sb.append(val).append(' ');
+    public static void func(int k) {
+        if (k == m) {
+            for (int i = 0; i < m; i++) {
+                System.out.print(arr[i] + " ");
             }
-            sb.append('\n');
+            System.out.println();
             return;
         }
-        for (int i = 0; i < N; i++) {
-            if (!visit[i]) { // 만약 해당 노드(값)을 방문하지 않았다면?
-                visit[i] = true; // 해당 노드를 방문상태로 변경
-                arr[depth] = i + 1; // 해당 깊이를 index로 하여 i + 1 값 저장
-                back(depth + 1); // 다음 자식 노드 방문을 위해 depth 1 증가시키면서 재귀호출
-                visit[i] = false; // 자식노드 방문이 끝나고 돌아오면 방문노드를 방문하지 않은 상태로 변경
+
+        for (int i = 1; i <= n; i++) {
+            if (!isUsed[i]) {
+                arr[k] = i;
+                isUsed[i] = true;
+                func(k + 1);
+                isUsed[i] = false;
             }
         }
     }
