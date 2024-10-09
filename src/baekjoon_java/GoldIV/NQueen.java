@@ -3,48 +3,37 @@ package baekjoon_java.GoldIV;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
-/*
-https://www.acmicpc.net/problem/9663
-백트래킹 14468KB 5296ms
-*/
+
 public class NQueen {
-    public static int N;
-    public static int[] board;
-    static int count = 0;
+    static boolean[] isused1 = new boolean[40];
+    static boolean[] isused2 = new boolean[40];
+    static boolean[] isused3 = new boolean[40];
+    static int cnt = 0;
+    static int n;
 
     public static void main(String args[]) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = Integer.parseInt(st.nextToken());
-        board = new int[N];
-        dfs(0);
-        System.out.println(count);
+        n = Integer.parseInt(br.readLine());
+        func(0);
+        System.out.println(cnt);
     }
-    public static void dfs(int depth) { // depth=열
-        if(depth == N) { // 모든 조건을 통과한 경우
-            count++;
+    public static void func(int cur) { // cur 열
+        if(cur == n) {
+            cnt++;
             return;
         }
-        for (int i = 0; i < N; i++) {
-            board[depth] = i; // 유망성 체크가 true일 경우, 가지치기를 하지 않고 계속해서 진행
-
-            if(isPossibleCheck(depth))
-                dfs(depth + 1); // 다음 자식 노드 방문을 위해 depth 1 증가시키면서 재귀호출
+        for (int i = 0; i < n; i++) {
+            if(isused1[i] || isused2[i + cur] || isused3[cur - i + n - 1]) {
+                continue;
+            }
+            isused1[i] = true;
+            isused2[i + cur] = true;
+            isused3[cur - i + n - 1] = true;
+            func(cur + 1);
+            isused1[i] = false;
+            isused2[i + cur] = false;
+            isused3[cur - i + n - 1] = false;
         }
-    }
-    public static boolean isPossibleCheck(int column) {// 유망성을 체크하는 메소드
-        for (int i = 0; i < column; i++) {
-
-            if (board[column] == board[i]) // 같은 행에 퀸
-                return false;
-
-            // 대각선 체크 - 열의 차와 행의 차가 같으면 대각선
-            if (Math.abs(column - i) == Math.abs(board[column] - board[i]))
-                return false;
-        }
-
-        return true;
     }
 }
