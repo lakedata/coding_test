@@ -1,43 +1,33 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.io.*;
 
-public class Main {
-    static int max;
-
-    public static void main(String arg[]) throws IOException {
+class Main {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        int[] a = new int[1000];
-        int[] b = new int[1000];
-        int[] c  = new int[1000];
-
-        int i = 0;
-        while (true) {
+        while(true) {
             st = new StringTokenizer(br.readLine());
-            a[i] = Integer.parseInt(st.nextToken());
-            b[i] = Integer.parseInt(st.nextToken());
-            c[i] = Integer.parseInt(st.nextToken());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
 
-            if (a[i] == 0 && b[i] == 0 && c[i] == 0)
+            if(a == 0 && b == 0 && c == 0)
                 break;
+            
+            int max = -1;
+            max = Math.max(max, a);
+            max = Math.max(max, b);
+            max = Math.max(max, c);
 
-            i++;
-        }
-
-        for (int j = 0; j < i; j++) {
-            int max = Math.max(Math.max(a[j], b[j]), c[j]);
-
-            if (a[j] == b[j] && b[j] == c[j])
-                System.out.println("Equilateral");
-            else if (max >= (a[j] + b[j] + c[j]) - max)
+            if(max >= a + b + c - max)
                 System.out.println("Invalid");
-            else if (a[j] == b[j] || a[j] == c[j] || b[j] == c[j])
+            else if(a == b && a == c && b == c)
+                System.out.println("Equilateral");
+            else if(a == b || a == c || b == c)
                 System.out.println("Isosceles");
-            else
-                System.out.println("Scalene");
+            else if(a != b && a != c && b != c)
+                 System.out.println("Scalene");
         }
     }
 }
