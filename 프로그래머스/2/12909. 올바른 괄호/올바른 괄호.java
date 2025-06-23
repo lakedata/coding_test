@@ -5,16 +5,15 @@ class Solution {
         ArrayDeque<Character> stack = new ArrayDeque<>();
         
         char[] a = s.toCharArray();
-        for(char c : a) {
-            if(c == '(') {
-                stack.push(c);
-            } else {
-                if(stack.isEmpty() || stack.pop() == c) {
-                    return false;
-                }
-            }
-        } 
 
+        for(char c : a) {
+            if(c == '(') stack.push(c);
+            else {
+                if(stack.isEmpty())
+                    return false;
+                stack.pop();
+            }
+        }
         return stack.isEmpty();
     }
 }
