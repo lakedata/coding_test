@@ -2,17 +2,16 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] array, int[][] commands) {
-        int length = commands.length;
-        int[] answer = new int[length];
+        int[] answer = new int[commands.length];
         
-        for(int i = 0; i < length; i++) {
-            int start = commands[i][0];
-            int end = commands[i][1];
-            int k = commands[i][2];
+        for(int c = 0; c < commands.length; c++) {
+            int i = commands[c][0];
+            int j = commands[c][1];
+            int k = commands[c][2];
             
-            int []cut = Arrays.copyOfRange(array, start-1, end);
-            Arrays.sort(cut);
-            answer[i] = cut[k-1];
+            int []slicedArr = Arrays.copyOfRange(array, i - 1, j);
+            Arrays.sort(slicedArr);
+            answer[c] = slicedArr[k - 1]; 
         }
         return answer;
     }
