@@ -58,16 +58,15 @@ public class Main {
             for (int i = 0; i < 4; i++) {
                 int nx = node.x + dx[i];
                 int ny = node.y + dy[i];
+                if (nx < 0 ||nx >= N || ny < 0 || ny >= M) continue;
 
-                if (nx >= 0 && ny >= 0 && nx < N && ny < M) {
-                    if (map[nx][ny] == 0 && !visit[nx][ny][node.wall]) {
-                        visit[nx][ny][node.wall] = true;
-                        queue.add(new Node(nx, ny, node.dist + 1, node.wall));
-                    } else if (map[nx][ny] == 1 && node.wall == 0 && !visit[nx][ny][1]) {
-                        visit[nx][ny][1] = true;
-                        queue.add(new Node(nx, ny, node.dist + 1, 1));
-                    }
-                }
+                if (map[nx][ny] == 0 && !visit[nx][ny][node.wall]) {
+                    visit[nx][ny][node.wall] = true;
+                    queue.add(new Node(nx, ny, node.dist + 1, node.wall));
+                } else if (map[nx][ny] == 1 && node.wall == 0 && !visit[nx][ny][1]) {
+                    visit[nx][ny][1] = true;
+                    queue.add(new Node(nx, ny, node.dist + 1, 1));
+                } 
             }
         }
         return -1;
