@@ -1,67 +1,66 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
-public class Main {
-    static int[] dx = {0, 0, -1, 1};
+class Main {
+    static int n, m;
+    static int[] dx = {0, 0, -1, 1};//왼쪽, 오른쪽, 앞, 뒤 
     static int[] dy = {-1, 1, 0, 0};
-    static int col, row;
-    static int[][] arr;
-    static Queue<Pair> que = new LinkedList<>();
+    static int[][] board;
 
-    static class Pair {
+    static class Point {
         int x, y;
 
-        public Pair(int x, int y) {
+        public Point(int x, int y) {
             this.x = x;
             this.y = y;
         }
     }
 
-    public static void main(String argp[]) throws IOException {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        row = Integer.parseInt(st.nextToken()); //가로
-        col = Integer.parseInt(st.nextToken()); //세로
 
-        arr = new int[col][row];
-        for (int i = 0; i < col; i++) {
+        m = Integer.parseInt(st.nextToken()); // 가로
+        n = Integer.parseInt(st.nextToken()); // 세로
+
+        board = new int[n][m];
+        Queue<Point> que = new LinkedList<>();
+
+        for(int x = 0; x < n; x++) {
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < row; j++) {
-                arr[i][j] = Integer.parseInt(st.nextToken());
-                if (arr[i][j] == 1) {
-                    que.add(new Pair(i, j)); //시작점이 여러 개
-                }
+            for(int y = 0; y < m; y++) {
+                    board[x][y] = Integer.parseInt(st.nextToken());
+                    if(board[x][y] == 1) {
+                        que.add(new Point(x, y)); // 익은 토마토 위치 큐에 삽입
+                    }
             }
         }
-        System.out.println(bfs());
-    }
 
-    public static int bfs() {
-        while (!que.isEmpty()) {
-            Pair cur = que.poll();
-
-            for (int dir = 0; dir < 4; dir++) {
+        // BFS
+        while(!que.isEmpty()) {
+            Point cur = que.poll();
+            for(int dir = 0; dir < 4; dir++) {
                 int nx = cur.x + dx[dir];
                 int ny = cur.y + dy[dir];
 
-                if (nx < 0 || nx >= col || ny < 0 || ny >= row) continue;
+                if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
+                if(board[nx][ny] != 0) continue;
 
-                if (arr[nx][ny] == 0) {
-                    que.add(new Pair(nx, ny));
-                    arr[nx][ny] = arr[cur.x][cur.y] + 1;
-                }
+                board[nx][ny] = board[cur.x][cur.y] + 1;
+                que.add(new Point(nx, ny));
             }
         }
 
-        int day = 0;
-        for (int i = 0; i < col; i++) {
-            for (int j = 0; j < row; j++) {
-                if (arr[i][j] == 0) {
-                    return -1;
+        int result = 0;
+        for (int x = 0; x < n; x++) {
+            for (int y = 0; y < m; y++) {
+                if (board[x][y] == 0) {
+                    System.out.println(-1);
+                    return;
                 }
-                day = Math.max(day, arr[i][j]);
+                result = Math.max(result, board[x][y]);
             }
         }
-        return day - 1;
+        System.out.println(result - 1);
     }
 }
