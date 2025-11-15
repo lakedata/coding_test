@@ -1,65 +1,44 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 class Solution {
-
-    int N;
-    int E;
-    int[][] matrix;
-    public int solution(int n, int s, int a, int b, int[][] fares) {
-        N = n;
-        E = fares.length;
-        matrix = new int[n][n];
-
-        for (int i = 0; i < E; i++) {
-            int u = fares[i][0] - 1;
-            int v = fares[i][1] - 1;
-            int cost = fares[i][2];
-            matrix[u][v] = cost;
-            matrix[v][u] = cost;
-        }
-
-        int[] together = dijkstra(s - 1);
-        int minCost = Integer.MAX_VALUE;
-        for(int i = 0; i < N; i++) {
-            int[] alone = dijkstra(i);
-            int cost = together[i] + alone[a - 1] + alone[b - 1];
-            if(cost < minCost) {
-                minCost = cost;
+    static final int INF = 40000000;
+    static int[][] graph = new int[200][200];
+    
+    void floyd(int n) {
+        for(int k = 0; k < n; ++k) {
+            for(int i = 0; i < n; ++i) {
+                for(int j = 0; j < n; ++j) {
+                    if(graph[i][k] + graph[k][j] < graph[i][j]) {
+                        graph[i][j] = graph[i][k] + graph[k][j];   
+                    }
+                }
             }
         }
-
-        return minCost;
     }
-
-    public int[] dijkstra(int start) {
-        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
-        boolean[] visited = new boolean[N];
-        int[] distance = new int[N];
-        Arrays.fill(distance, Integer.MAX_VALUE);
-        distance[start] = 0;
-        pq.add(new int[] {0, start});
-
-        while (!pq.isEmpty()) {
-            int[] cur = pq.remove();
-            int u = cur[1];
-            if (visited[u]) {
-                continue;
-            }
-
-            visited[u] = true;
-            for (int v = 0; v < N; v++) {
-                if(matrix[u][v] == 0) {
-                    continue;
-                }
-                if (distance[u] + matrix[u][v] < distance[v]) {
-                    distance[v] = distance[u] + matrix[u][v];
-                    pq.add(new int[]{distance[v], v});
-                }
+    public int solution(int n, int s, int a, int b, int[][] fares) {
+        for(int i = 0; i < n; ++i) {
+            for(int j = 0; j < n; ++j) {
+                if(i == j)
+                    graph[i][j] = 0;
+                else 
+                    graph[i][j] = INF;
             }
         }
-
-        return distance;
+        
+        for(int[] edge : fares) {
+            graph[edge[0]-1][edge[1]-1] = edge[2];
+            graph[edge[1]-1][edge[0]-1] = edge[2];
+        }
+        
+        floyd(n);
+        
+        --s;
+        --a;
+        --b;
+        int answer = INF;
+        for(int k = 0; k < n; ++k) {
+            answer = Math.min(answer, graph[s][k] + graph[k][a] + graph[k][b]);
+        }        
+        return answer;
     }
 }
